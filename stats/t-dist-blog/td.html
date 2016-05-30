@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Recap</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>Now let&#39;s plot our t-statistic in the t-distribution to see where it lands.  As mentioned above, the t-distribution is not a single distribution curve but rather a family of distribution curves, with each curve corresponding to a particular degrees of freedom.  The degrees of freedom for our t-statistic is n - 1, the same as the degrees of freedom for the unbiased sample variance which we  used in the calculation of the t-statistic.  So we plot our t-statistic against the t-distribution curve with degrees of freedom k = n - 1.</p>
+
+<pre><code class="r">library(ggplot2)
+
+N &lt;- 30
+s &lt;- 3.1
+nor.mean &lt;- 68.5
+pop.mean &lt;- 67
+nor.tscore &lt;- (nor.mean - pop.mean) / (s / sqrt(N))
+
+x &lt;- seq(-4.5,4.5,0.01)
+shade_x &lt;- seq(nor.tscore,4.5,0.01)
+shade_y &lt;- dnorm(shade_x)
+shade &lt;- data.frame( rbind(c(nor.tscore,0), cbind(shade_x,shade_y), c(4.5,0)) )
+
+ggplot() + 
+    stat_function(aes(x=x), 
+                  fun=dt, 
+                  args=list(df=N-1),
+                  size=1, 
+                  colour=&quot;blue&quot;) +
+    ggtitle(&quot;t-distribution, degrees of freedom = N-1 = 29&quot;) + 
+    geom_hline(y=0, colour=&quot;darkgray&quot;) +
+    geom_vline(x=0, linetype=&quot;dashed&quot;, colour=&quot;red&quot;, size=1) +
+    geom_vline(x=nor.tscore, linetype=&quot;dashed&quot;, colour=&quot;orange&quot;, size=1) +
+    geom_polygon(data = shade, aes(shade_x, shade_y), fill=&quot;yellow&quot;) +
+    ylab(&quot;Probability density&quot;) + 
+    xlab(&quot;Sample mean t-scores&quot;)  +
+    scale_x_continuous(breaks=-4:4, labels=-4:4)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<p>Like the R functions dnorm, pnorm, qnorm, and rnorm that deal with normal distributions, we
+can use the dt, pt, qt, and rt functions when we&#39;re dealing with t-distributions.  Each of these
+functions takes an additional required parameter, df, for the degrees of freedom, which specifies
+which t-distribution curve (from the t-distribution family) we&#39;re working with.</p>
+
+<p>The p-value for our significance test (the area of the yellow-shaded region) can be determined using the pt function with df=N-1:</p>
+
+<pre><code class="r">1 - pt( nor.tscore, df=N-1 )
+</code></pre>
+
+<pre><code>## [1] 0.006444771
+</code></pre>
+
+<p>Compare this to the p-value we got using the z-score and the standard normal distribution, p=0.003.
+The p-value using the t-score and t-distribution is twice as large.  This is because the t-distribution
+has &ldquo;fatter tails&rdquo; than the standard normal.  &ldquo;Fatter tails&rdquo; simply means that extreme outcomes which fall
+far from the mean have a greater probability of occuring under a t-distribution than under the standard
+normal distribution.  In the context of our significance test, the t-distribution represents the sampling distribution of the mean.
+So it&#39;s basically giving a higher probability of observing sample means that fall far from the population
+mean, to account for that extra bit of error that gets introduced when we have to estimate the underlying
+population mean and variance from a small sample.</p>
+
+<h2>Recap</h2>
+
+<h2>latex math</h2>
+
+<p>\begin{align<em>} 
+s<sup>2</sup> &amp; = \frac{N}{N-1} \cdot \sigma_x<sup>2</sup>
+\[8pt]
+s<sup>2</sup> &amp; = \frac{30}{30-1} \cdot 9
+\[8pt]
+s<sup>2</sup> &amp; = 9.3
+\[8pt]
+s &amp; = \sqrt{9.3} = 3.1
+\ \
+where,
+\[8pt]
+\sigma_x<sup>2</sup> &amp; = biased \ sample \ variance
+\[8pt]
+s<sup>2</sup> &amp; = unbiased \ sample \ variance 
+\[8pt]
+s &amp; = unbiased \ sample \ standard \ deviation
+\[8pt]
+N &amp; = the \ sample \ size
+\end{align</em>}</p>
+
+<p>\mathchardef\mhyphen=&ldquo;2D
+\begin{align<em>} 
+t\mhyphen statistic &amp; = \frac{\overline{X} - \mu}{ \frac{s}{\sqrt{N}} }
+\[8pt]
+&amp; = \frac{68.5 - 67}{ \frac{3.1}{\sqrt{30} } }
+\[8pt]
+&amp; = 2.650
+\end{align</em>}</p>
+
+<p>\begin{align<em>} 
+z-statistic &amp; = \frac{\overline{X} - \mu}{ \frac{\sigma}{\sqrt{N}} }
+\ \
+where,
+\[8pt]
+\overline{X} &amp; = the \ sample \ mean
+\[8pt]
+\mu &amp; = the \ population \ mean
+\[8pt]
+\sigma &amp; = the \ population \ standard \ deviation
+\[8pt]
+N &amp; = the \ sample \ size
+\end{align</em>}</p>
+
+<p>\begin{align*} </p>
+
+<p>Q &amp; = \sum_{i=1}<sup>n</sup> X_i<sup>2</sup> \sim \chi_n<sup>2</sup></p>
+
+<p>\ \
+(n-1) \frac{s<sup>2}{\sigma<sup>2}</sup></sup> \sim \chi<em>{n-1}<sup>2</sup>
+\ \
+\frac{(n-1)}{\sigma<sup>2}</sup>
+\ \
+(n-1) \frac{ \frac{1}{n-1} \sum</em>{i=1}<sup>n</sup> (X<em>i - \mu)<sup>2}{\sigma<sup>2}</sup></sup> \sim \chi</em>{n-1}<sup>2</sup>
+\ \
+\frac{ \sum<em>{i=1}<sup>n</sup> (X_i - \mu)<sup>2}{\sigma<sup>2}</sup></sup> \sim \chi</em>{n-1}<sup>2</sup>
+\ \
+\sum<em>{i=1}<sup>n</sup> X_i<sup>2</sup>  \sim \chi</em>{n-1}<sup>2</sup>
+\ \
+s<sup>2</sup> = \frac{1}{n-1} \sum<em>{i=1}<sup>n</sup> (X_i - \overline{X})<sup>2</sup>
+\ \
+(n-1) \cdot s<sup>2</sup> = \sum</em>{i=1}<sup>n</sup> (X<em>i - \overline{X})<sup>2</sup>
+\ \
+(n-1) \cdot s<sup>2</sup> = \sum</em>{i=1}<sup>n</sup> (X<em>i - 0)<sup>2</sup>
+\ \
+(n-1) \cdot s<sup>2</sup> = \sum</em>{i=1}<sup>n</sup> X_i<sup>2</sup></p>
+
+<p>\end{align*}</p>
+
+</body>
+
+</html>

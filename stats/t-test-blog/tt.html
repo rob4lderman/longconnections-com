@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>one sample t-stat</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>For this example we&#39;ll need some sample data. Let&#39;s just create some randomly.  We&#39;ll create two samples, both with a sample size of 30, using the rnorm function.  For one of the samples we&#39;ll add 1 to each value.  This should give us a real, measurable difference between the two samples.  </p>
+
+<pre><code class="r">set.seed(2)
+n1 &lt;- 30
+n2 &lt;- 30
+samp.1 &lt;- rnorm(n1)
+samp.2 &lt;- rnorm(n2) + 1
+</code></pre>
+
+<p>The significance test gives us the probability that the difference between the samples is due to random chance.  In this example, we know for a fact that there&#39;s a real difference, since we created that difference ourselves by shifting up the second sample by a full standard deviation (remember that the standard deviation of the standard normal distribution is 1).  So we should expect to see a statistically significant difference between the two samples.</p>
+
+<p>For the purpose of comparing and contrasting the different types of t-tests, we&#39;ll run the same sample data thru all three t-tests described above: (1) paired samples, (2) indepedent samples with equal variances, and (3) independent samples with un-equal variances.  (Normally you would not use all three t-tests.  You&#39;d use just the one t-test that&#39;s most appropriate for your sample data).</p>
+
+<p>First we&#39;ll treat the data like paired samples.</p>
+
+<pre><code class="r">library(ggplot2)
+
+samp.diffs &lt;- samp.2 - samp.1
+t.score &lt;- mean(samp.diffs) / sqrt(var(samp.diffs)/n1)
+df = n1 - 1
+p.value &lt;- 2 * (1 - pt(t.score, df=df) )
+
+t.score
+</code></pre>
+
+<pre><code>## [1] 2.29345
+</code></pre>
+
+<pre><code class="r">df
+</code></pre>
+
+<pre><code>## [1] 29
+</code></pre>
+
+<pre><code class="r">p.value
+</code></pre>
+
+<pre><code>## [1] 0.02925964
+</code></pre>
+
+<p>Note that the p-value is calculated according to a two-tailed significance test.  The chart below
+illustrates where that p-value comes from:</p>
+
+<pre><code class="r">x &lt;- seq(-4.5,4.5,0.01)
+shade_x.lower &lt;- seq(-4.5,-t.score,0.01)
+shade_y.lower &lt;- dt(shade_x.lower, df=df)
+shade.lower &lt;- data.frame( rbind(c(-4.5,0), cbind(shade_x.lower,shade_y.lower), c(-t.score,0)) )
+
+shade_x.upper &lt;- seq(t.score,4.5,0.01)
+shade_y.upper &lt;- dt(shade_x.upper, df=df)
+shade.upper &lt;- data.frame( rbind(c(t.score,0), cbind(shade_x.upper,shade_y.upper), c(4.5,0)) )
+
+ggplot() + 
+    stat_function(aes(x=x), 
+                  fun=dt, 
+                  args=list(df=df),
+                  size=1, 
+                  colour=&quot;blue&quot;) +
+    ggtitle(&quot;t-distribution, degrees of freedom = n-1 = 29&quot;) + 
+    geom_hline(y=0, colour=&quot;darkgray&quot;) +
+    geom_vline(x=0, colour=&quot;darkgray&quot;) +
+    geom_vline(x=-t.score, linetype=&quot;dashed&quot;, colour=&quot;orange&quot;, size=1) +
+    geom_vline(x=t.score, linetype=&quot;dashed&quot;, colour=&quot;orange&quot;, size=1) +
+    geom_polygon(data = shade.lower, aes(shade_x.lower, shade_y.lower), fill=&quot;yellow&quot;) +
+    geom_polygon(data = shade.upper, aes(shade_x.upper, shade_y.upper), fill=&quot;yellow&quot;) +
+    ylab(&quot;Probability density&quot;) + 
+    xlab(&quot;t-scores&quot;)  +
+    scale_x_continuous(breaks=-4:4, labels=-4:4)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-3"/> </p>
+
+<p>The vertical orange lines indicate the t-score and its corresponding opposite t-score (the negative t-score).
+You use both the positive and negative t-scores for two-tailed significance tests.  Two-tailed significance
+tests allow the difference between samples to vary in either direction.  If we were only interested in 
+a difference in one direction, then we&#39;d just use the one t-score along that tail.  The p-value
+(probability) for the one-tailed test is always half the p-value of the two-tailed test.</p>
+
+<p>Now let&#39;s treat the samples as if they were independent samples with equal variances.</p>
+
+<pre><code class="r">var.pooled &lt;- ( (n1-1) * var(samp.1) + (n2-1) * var(samp.2) ) / (n1 + n2 - 2)
+t.score &lt;- (mean(samp.2) - mean(samp.1)) / ( sqrt(var.pooled) * sqrt( 1/n1 + 1/n2 ) )
+df = n1 + n2 - 2
+p.value &lt;- 2 * (1 - pt(t.score, df=df) )
+
+t.score
+</code></pre>
+
+<pre><code>## [1] 2.457141
+</code></pre>
+
+<pre><code class="r">df
+</code></pre>
+
+<pre><code>## [1] 58
+</code></pre>
+
+<pre><code class="r">p.value
+</code></pre>
+
+<pre><code>## [1] 0.01701674
+</code></pre>
+
+<p>And finally, let&#39;s treat the samples as if they were independent samples with un-equal variances.</p>
+
+<pre><code class="r">t.score &lt;- (mean(samp.2) - mean(samp.1)) /  sqrt(var(samp.1)/n1 + var(samp.2)/n2 ) 
+df &lt;- (var(samp.1)/n1 + var(samp.2)/n2)^2 / ( (var(samp.1)/n1)^2 / (n1-1) + (var(samp.2)/n2)^2 / (n2-1) )
+p.value &lt;- 2 * (1 - pt(t.score, df=df) )
+
+t.score
+</code></pre>
+
+<pre><code>## [1] 2.457141
+</code></pre>
+
+<pre><code class="r">df
+</code></pre>
+
+<pre><code>## [1] 57.96975
+</code></pre>
+
+<pre><code class="r">p.value
+</code></pre>
+
+<pre><code>## [1] 0.01701837
+</code></pre>
+
+<p>Note that the t.score for both the equal variances and unequal variances is exactly the same. 
+This is always true when the sample sizes are equal (n1 == n2).  (I leave it as an exercise for 
+the reader to prove that algebraically).</p>
+
+<p>R provides a convenient function, t.test, that takes two samples and generates the t-statistic,
+degrees of freedom, and the p-value:</p>
+
+<pre><code class="r">t.test(samp.1, samp.2, paired=T)
+</code></pre>
+
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  samp.1 and samp.2
+## t = -2.2935, df = 29, p-value = 0.02926
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.39286961 -0.07968764
+## sample estimates:
+## mean of the differences 
+##              -0.7362786
+</code></pre>
+
+<pre><code class="r">t.test(samp.1, samp.2, paired=F, var.equal=T)
+</code></pre>
+
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  samp.1 and samp.2
+## t = -2.4571, df = 58, p-value = 0.01702
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.3360903 -0.1364669
+## sample estimates:
+## mean of x mean of y 
+## 0.2286718 0.9649504
+</code></pre>
+
+<pre><code class="r">t.test(samp.1, samp.2, paired=F, var.equal=F)
+</code></pre>
+
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  samp.1 and samp.2
+## t = -2.4571, df = 57.97, p-value = 0.01702
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.3360970 -0.1364603
+## sample estimates:
+## mean of x mean of y 
+## 0.2286718 0.9649504
+</code></pre>
+
+<h2>one sample t-stat</h2>
+
+<p>\mathchardef\mhyphen=&ldquo;2D
+\begin{align<em>} 
+t\mhyphen statistic &amp; = \frac{\overline{X} - \mu_0}{ \frac{s}{\sqrt{n}} }
+\ \
+df &amp; = n - 1
+\ \
+where,
+\[8pt]
+\overline{X} &amp; = sample \ mean
+\[8pt]
+\mu_0 &amp; = assumed \ population \ mean \ (null\ hypothesis)
+\[8pt]
+s &amp; = unbiased \ sample \ variance
+\[8pt]
+df &amp; = degrees \ of \ freedom
+\end{align</em>}</p>
+
+<h2>two sample paired t-stat</h2>
+
+<p>\mathchardef\mhyphen=&quot;2D
+\begin{align<em>} 
+t\mhyphen statistic &amp; = \frac{\overline{X_d} - 0}{ \frac{s}{\sqrt{n}} }
+\ \
+df &amp; = n - 1
+\ \
+where,
+\[8pt]
+\overline{X_d} &amp; = mean \ of \ the \ di!f!f!s
+\end{align</em>}</p>
+
+<h2>two sample, equal vars</h2>
+
+<p>\mathchardef\mhyphen=&quot;2D
+\begin{align<em>} 
+s_p<sup>2</sup> &amp; = \frac{ (n_x - 1) \cdot s_x<sup>2</sup> +  (n_y - 1) \cdot s_y<sup>2</sup> }{ n_x + n_y - 2 }
+\ \
+t\mhyphen statistic &amp; = \frac{\overline{X} - \overline{Y} }{ s_p \cdot \sqrt{\frac{1}{n_x} + \frac{1}{n_y}}} 
+\ \
+df &amp; = n_x + n_y - 2
+\ \
+where,
+\[8pt]
+\overline{X} &amp; = sample \ mean
+\[8pt]
+\overline{Y} &amp; = sample \ mean
+\[8pt]
+s_p<sup>2</sup> &amp; = pooled \ sample \ variance
+\[8pt]
+s_p &amp; = pooled \ sample \ standard \ deviation
+\[8pt]
+s_x<sup>2</sup> &amp; = unbiased \ sample \ variance \ for \ X
+\[8pt]
+s_y<sup>2</sup> &amp; = unbiased \ sample \ variance \ for \ Y
+\[8pt]
+n_x &amp; = sample \ size \ of \ X
+\[8pt]
+n_y &amp; = sample \ size \ of \ Y
+\end{align</em>}</p>
+
+<h2>two sample, UNequal vars</h2>
+
+<p>\mathchardef\mhyphen=&quot;2D
+\begin{align<em>} 
+t\mhyphen statistic &amp; = \frac{\overline{X} - \overline{Y} }{ \sqrt{\frac{s_x<sup>2}{n_x}</sup> + \frac{s_y<sup>2}{n_y}}}</sup> 
+\ \
+df &amp; = \frac{ (\frac{s_x<sup>2}{n_x}</sup> + \frac{s_y<sup>2}{n_y})<sup>2</sup></sup> } { \frac{ (\frac{s_x<sup>2}{n_x})<sup>2</sup></sup> }{ n_x - 1 } +  \frac{ (\frac{s_y<sup>2}{n_y})<sup>2</sup></sup> }{ n_y - 1 } }
+\end{align</em>}</p>
+
+</body>
+
+</html>

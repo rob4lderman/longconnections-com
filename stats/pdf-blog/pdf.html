@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>R Functions</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>Let&#39;s talk about probability density functions.  In the previous article charted our distribution with a density histogram and showed how to interpret densities and how to convert them to probabilities.  In the process we had a quick preview of a probability density function when we overlaid the data with a normal distribution curve.  Here&#39;s the chart from the previous article to refresh your memory:</p>
+
+<pre><code class="r">library(UsingR)
+library(ggplot2)
+data(father.son)
+heights &lt;- sample(father.son$fheight)
+
+ggplot() + 
+    geom_histogram(aes(y=..density..,x=heights), 
+                   binwidth=1, fill=&quot;yellow&quot;, colour=&quot;black&quot;) +
+    ggtitle(&quot;Density histogram of observed heights&quot;) + 
+    ylab(&quot;Probability densities&quot;) + 
+    xlab(&quot;Heights (bin width = 1 in) &quot;) +
+    geom_vline(x=mean(heights),linetype=&quot;dashed&quot;,size=1,colour=&quot;blue&quot;) +
+    stat_function(aes(x=heights), fun = dnorm, colour=&quot;red&quot;,size=1,
+                  arg=list(mean=mean(heights), sd=sd(heights)) )
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<p>The normal distribution curve (red line) is one example of a probability density function.  A probablity density function (sometimes referred to as a distribution curve) is a mathematical function that describes a random variable&#39;s distribution, in terms of probability densities.</p>
+
+<p>A probablity density function takes an outcome value as input and returns the probability density associated with that outcome.  Remember that probability density is probability divided by unit of outcome, so in order to convert the probability density to an actual probability, we need to multiply it by the bin width, where the bin width is the width of the range of outcomes that we&#39;re interested in.</p>
+
+<p>So for example, if we wanted to know the probability of observing someone with a height of 70in, we could plug 70in into the probability density function (the normal distribution curve) that we overlaid, and it will return the corresponding probability density.  So then what is our bin width?  Well, the &ldquo;bin width&rdquo; for a singular outcome of a continuous distribution is 0, because when we&#39;re talking about the the outcome 70in, we&#39;re actually talking about 70.00000000000&hellip;, and the probability of observing that precise outcome is 0.</p>
+
+<p>Instead we can compute the probability of observing an outcome within a given range of outcomes, for example between 70 and 71in.  The range is essentially the same as the bin width, but since our probability density function is a continuously changing function, the density of the first value in the range might be different than the density of the last value in the range, so computing the probability isn&#39;t as easy as it is when the outcomes are &ldquo;binned&rdquo; up with constant density over the range, as they are in the density histogram.  </p>
+
+<p>Recall that the probability for each bin in the density histogram is equal to the area of the bin (height * width).  In order to compute the probability of a given range using the probability density function, we need to determine the area under the curve across that range of outcomes.  This is the equivalent of taking an integral in calculus. </p>
+
+<p>Aside: Calculating areas under function curves is a calculus thing.  So if you&#39;ve learned calculus then this should look familiar.  If you haven&#39;t learned calculus, don&#39;t worry about it, it&#39;s not that important.  You don&#39;t need to know calculus to understand statistics.  Just know that calculus provides the theories that allow us to compute the area under the curve precisely; but you can let your computer do the actual number crunching.</p>
+
+<p>So for example if we wanted to know the probability of observing a height between 70in and 71in, we&#39;d compute the area under the distribution curve between 70 and 71.  The area in question is depicted below in red.</p>
+
+<pre><code class="r">x &lt;- seq(70,71,0.001)
+y &lt;- dnorm(x, mean=mean(heights), sd=sd(heights))
+shade &lt;- data.frame( rbind(c(70,0), cbind(x,y), c(71,0)) )
+
+ggplot() + 
+    geom_histogram(aes(y=..density..,x=heights), 
+                   binwidth=1, fill=&quot;yellow&quot;, colour=&quot;black&quot;) +
+    ggtitle(&quot;Density histogram of observed heights&quot;) + 
+    ylab(&quot;Probability densities&quot;) + 
+    xlab(&quot;Heights (bin width = 1 in) &quot;) +
+    geom_vline(x=mean(heights),linetype=&quot;dashed&quot;,size=1,colour=&quot;blue&quot;) +
+    stat_function(aes(x=heights), fun = dnorm, colour=&quot;red&quot;,size=1,
+                  arg=list(mean=mean(heights), sd=sd(heights)) ) +
+    geom_polygon(data = shade, aes(x, y), fill=&quot;red&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-2"/> </p>
+
+<p>Notice that the area in red looks to be roughly the same as the yellow bar behind it. Remember the yellow bar represents our &ldquo;binned up&rdquo; estimate of the probability for that range.</p>
+
+<p>As with the density histogram, it&#39;s worth noting that the area under the probability density function across the entire range of outcomes is equal to 1.  This is consistent with the idea that the sum of probabilities for all outcomes in a distribution equals 1. </p>
+
+<h3>R Functions</h3>
+
+<p>R provides a few handy functions for working with the probability density function of a normal distribution:   </p>
+
+<ul>
+<li>dnorm: d = density - takes an outcome value as input and returns its density</li>
+<li>pnorm: p = probability = takes an outcome value as input and returns the probability of observing an outcome less than or equal to the given outcome (i.e. the range from -infinity up to the given outcome).</li>
+<li>qnorm: q = quantile - takes a probability value (a &ldquo;quantile&rdquo;) and returns the corresponding outcome such that the probability of observing an outcome less than or equal to the returned outcome is equal to the given probability (go ahead and take a second to parse that&hellip;).</li>
+</ul>
+
+<p>qnorm is basically the reverse of pnorm.  Where pnorm takes an outcome and returns a probability, qnorm takes a probability (technically a &ldquo;quantile&rdquo;), and returns an outcome.  Or in mathematical terms:</p>
+
+<pre><code>qnorm( pnorm(x) ) = x
+</code></pre>
+
+<p>where x is an outcome value.  </p>
+
+<p>pnorm and qnorm are probably the functions you&#39;ll use most often, so take some time to get familiar with them. </p>
+
+<h3>Probability function</h3>
+
+<p>So for example we can use pnorm to determine the area of the region shaded in red above, which gives us the probability of observing a height between 70 and 71in (according to the normal distribution curve that we fitted to the data).  First we compute the pnorm result for 71, which gives us the probability of 71 or less, then subtract away the pnorm result for 70.  This leaves us with the probability of observing an outcome in the range 70 - 71in:</p>
+
+<pre><code class="r">p71.or.less &lt;- pnorm(71, mean=mean(heights), sd=sd(heights))
+p70.or.less &lt;- pnorm(70, mean=mean(heights), sd=sd(heights))
+round(p71.or.less - p70.or.less, 3)
+</code></pre>
+
+<pre><code>## [1] 0.086
+</code></pre>
+
+<p>The probability value is equal to the area of the region shaded in red.  Notice that it&#39;s approximately the same area as the yellow bar behind it, whose height is about 0.086 (which when multiplied by the bin width (1 inch) gives the probability, 0.086, which is the same as the pnorm-computed probability).</p>
+
+<h3>Quantile Function</h3>
+
+<p>As mentioned above, the quantile function takes a probability and returns the corresponding outcome such that the probability of observing an outcome that is less than or equal to the returned outcome is equal to the given probability.  </p>
+
+<p>For example, we can use the quantile functions to answer questions like, &ldquo;what is the height for which 25% of the population is shorter than or equal to that height?&rdquo;</p>
+
+<pre><code class="r">height &lt;- qnorm(0.25, mean=mean(heights), sd=sd(heights));
+round(height, 1)
+</code></pre>
+
+<pre><code>## [1] 65.8
+</code></pre>
+
+<p>This tells us that 25% of our sample heights are equal to or shorter than 65.8in.  Or in other words, if you selected a height at random from the sample, the probability that it is less or equal to 65.8 in is 0.25.</p>
+
+<h3>Recap</h3>
+
+</body>
+
+</html>

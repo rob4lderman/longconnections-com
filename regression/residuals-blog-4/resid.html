@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Intro to Regression: Part 4: Distribution of prediction errors (aka the residuals) and goodness of fit (R<sup>2)</sup></title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>Intro to Regression: Part 4: Distribution of prediction errors (aka the residuals) and goodness of fit (R<sup>2)</sup></h2>
+
+<p>A simple linear regression model has the following form:</p>
+
+<p>\[
+Y = \beta_0 + \beta_1 X + \epsilon
+\]</p>
+
+<ul>
+<li>Y is the response variable</li>
+<li>X is the predictor variable</li>
+<li>\(\beta_0\) is the Y-intercept of the regression line</li>
+<li>\(\beta_1\) is the slope of the regression line</li>
+<li>\(\epsilon\) is the error term, aka the &ldquo;residuals&rdquo;</li>
+</ul>
+
+<p>The regression line, technical speaking, is everything <em>but</em> the error term:</p>
+
+<p>\[
+Y = \beta_0 + \beta_1 X 
+\]</p>
+
+<p>The regression line equation, \(\beta_0 + \beta_1 X\), tends not to perfectly predict the value
+of Y.  This &ldquo;prediction error&rdquo; is accounted for by the error term in the model, \(\epsilon\).
+That&#39;s why the error term is there.  It has no effect on the shape of the
+regression line (its position or slope).  It just represents the difference
+between the predicted values of Y and the actual values of Y.</p>
+
+<p>\[
+\begin{align*}
+Y &= \beta_0 + \beta_1 X + \epsilon
+\\
+\hat{Y} &= \beta_0 + \beta_1 X 
+\\
+Y &= \hat{Y} + \epsilon
+\\
+Y - \hat{Y} &= \epsilon
+\end{align*}
+\]</p>
+
+<p>The error term consists of the <strong><em>residuals</em></strong>: the discrepencies between the predicted
+values, \(\hat{Y}\), and the actual values, \(Y\).   The predicted values of Y are the points 
+that lie directly along the regression line.  The residuals are the differences between
+the line (the predicted values) and the actual data points.  </p>
+
+<p>The residuals are highlighted in the chart below by the red lines (using the mtcars example from part 2):</p>
+
+<hr/>
+
+<pre><code class="r">    library(ggplot2)
+    library(grid)
+    data(mtcars)
+
+    model &lt;- lm(mpg ~ wt, data=mtcars)
+    mpg.predicted &lt;- predict(model) 
+
+    qplot(x=wt, y=mpg, data=mtcars) + 
+        ggtitle(&quot;mpg vs. weight&quot;) + 
+        xlab(&quot;weight (x 1000 lbs)&quot;) + 
+        stat_smooth(method=&quot;lm&quot;, se=FALSE, size=1) +
+        geom_line(aes(x=c(mtcars$wt, mtcars$wt),
+                      y=c(mtcars$mpg,mpg.predicted), 
+                      group=rep(seq_along(mtcars$wt),2)),
+                  color=&quot;red&quot;, 
+                  linetype=&quot;dotted&quot;, 
+                  arrow=arrow(ends=&quot;both&quot;,
+                              type=&quot;closed&quot;,
+                              length=unit(3,&quot;points&quot;)))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<p>The table below tabulates the actual values of Y (mpg), the predicted values of Y, and the residuals:</p>
+
+<hr/>
+
+<pre><code class="r">    mpg.actual &lt;- mtcars$mpg
+    mpg.predicted &lt;- predict(model)
+    mpg.residual &lt;- resid(model)
+
+    data.frame(mpg.actual, mpg.predicted, mpg.residual)
+</code></pre>
+
+<pre><code>##                     mpg.actual mpg.predicted mpg.residual
+## Mazda RX4                 21.0     23.282611   -2.2826106
+## Mazda RX4 Wag             21.0     21.919770   -0.9197704
+## Datsun 710                22.8     24.885952   -2.0859521
+## Hornet 4 Drive            21.4     20.102650    1.2973499
+## Hornet Sportabout         18.7     18.900144   -0.2001440
+## Valiant                   18.1     18.793255   -0.6932545
+## Duster 360                14.3     18.205363   -3.9053627
+## Merc 240D                 24.4     20.236262    4.1637381
+## Merc 230                  22.8     20.450041    2.3499593
+## Merc 280                  19.2     18.900144    0.2998560
+## Merc 280C                 17.8     18.900144   -1.1001440
+## Merc 450SE                16.4     15.533127    0.8668731
+## Merc 450SL                17.3     17.350247   -0.0502472
+## Merc 450SLC               15.2     17.083024   -1.8830236
+## Cadillac Fleetwood        10.4      9.226650    1.1733496
+## Lincoln Continental       10.4      8.296712    2.1032876
+## Chrysler Imperial         14.7      8.718926    5.9810744
+## Fiat 128                  32.4     25.527289    6.8727113
+## Honda Civic               30.4     28.653805    1.7461954
+## Toyota Corolla            33.9     27.478021    6.4219792
+## Toyota Corona             21.5     24.111004   -2.6110037
+## Dodge Challenger          15.5     18.472586   -2.9725862
+## AMC Javelin               15.2     18.926866   -3.7268663
+## Camaro Z28                13.3     16.762355   -3.4623553
+## Pontiac Firebird          19.2     16.735633    2.4643670
+## Fiat X1-9                 27.3     26.943574    0.3564263
+## Porsche 914-2             26.0     25.847957    0.1520430
+## Lotus Europa              30.4     29.198941    1.2010593
+## Ford Pantera L            15.8     20.343151   -4.5431513
+## Ferrari Dino              19.7     22.480940   -2.7809399
+## Maserati Bora             15.0     18.205363   -3.2053627
+## Volvo 142E                21.4     22.427495   -1.0274952
+</code></pre>
+
+<pre><code class="r">    ##                     mpg.actual mpg.predicted mpg.residual
+    ## Mazda RX4                 21.0     23.282611   -2.2826106
+    ## Mazda RX4 Wag             21.0     21.919770   -0.9197704
+    ## Datsun 710                22.8     24.885952   -2.0859521
+    ## Hornet 4 Drive            21.4     20.102650    1.2973499
+    ## Hornet Sportabout         18.7     18.900144   -0.2001440
+    ## Valiant                   18.1     18.793255   -0.6932545
+    ## ...
+</code></pre>
+
+<p><br /></p>
+
+<h3>Plotting the residuals</h3>
+
+<p>It&#39;s usually a good idea to do a cursory examination of the residuals.  We expect the residuals
+to be somewhat normally distributed around 0.  Why?  Because that means the prediction errors
+are somewhat balanced around the regression line.  If the prediction errors are NOT balanced
+around the regression line, then the relationship between predictor and response variables
+may not be, in fact, linear, and further investigation into the relationship is warranted.</p>
+
+<p><strong><em>Linear model assumption:</em></strong> One of the assumptions about linear models is that the residuals are 
+normally distributed around 0.  If that assumption does not hold, then the accuracy of the linear 
+model can&#39;t be relied on.</p>
+
+<p>Let&#39;s examine the residuals by plotting them.</p>
+
+<hr/>
+
+<pre><code class="r">    qplot(x=mtcars$wt, y=mpg.residual) + 
+        ggtitle(&quot;mpg vs. weight - residuals&quot;) + 
+        xlab(&quot;weight (x 1000 lbs)&quot;) + 
+        ylab(&quot;mpg residual (actual - predicted)&quot;) +
+        geom_hline(y=0, colour=&quot;blue&quot;, linetype=&quot;dashed&quot;, size=1)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-3"/> </p>
+
+<p>The residuals appear to be somewhat balanced around 0.  We can get a better feel 
+for the distribution of residuals by using a histogram.</p>
+
+<hr/>
+
+<pre><code class="r">    hist(mpg.residual, 
+         col=&quot;yellow&quot;, 
+         main=&quot;Distribution of mpg residuals&quot;, 
+         xlab=&quot;mpg residuals&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-4"/> </p>
+
+<p>It&#39;s not a perfectly normal distribution by any means, but it&#39;s close enough.  What we&#39;re 
+really looking for are non-normal patterns in the residual distribution.  Such patterns
+require an explanation before we can trust that the linear model is sound.  Often these
+patterns suggest either that the correlation is not linear, or that a confounding variable is not accounted for.</p>
+
+<p><br /></p>
+
+<h3>Goodness of fit - R<sup>2</sup></h3>
+
+<p>The accuracy of the linear model, aka its &ldquo;goodness of fit&rdquo;, can be gauged by looking at the
+variance of the residuals.  A small residual variance means the
+discrepencies between predicted and actual values of the response variable are small, which suggests a good fit.
+A large residual variance reflects larger discrepencies, which suggests a not-so-good fit.</p>
+
+<p>One measure of goodness of fit is known as <strong>R<sup>2</sup></strong>. R<sup>2</sup> is a ratio that relates the 
+<em>total variance</em> of the response variable to the <em>residual variance</em>. </p>
+
+<p><strong><em>Total variance</em></strong> of the response variable is simply the variance of the response variable alone.  It could be thought
+of as the variance of the response variable <em>without</em> the regression model.</p>
+
+<p><strong><em>Residual variance</em></strong> is the variance of the response variable <em>with</em> the model.  </p>
+
+<p>In other words, residual variance is the variance of the response variable <em>with respect to the regression model</em>, just as 
+total variance is the variance of the response variable <em>with respect to its mean</em>.</p>
+
+<p>R<sup>2</sup> tells us how much of the total variance of the response variable is &ldquo;explained by the model&rdquo;.  It is calculated
+by the equation below:</p>
+
+<p>\[
+R^2 = 1 - \frac{ SS_{res} }{ SS_{tot} }
+\]</p>
+
+<ul>
+<li>\(SS_{res}\) is the sum-of-squares of the residuals
+<li>\(SS_{tot}\) is the sum-of-squares of the response variable alone (wrt its mean)
+</ul>
+
+<p>When \(SS_{res}\) is small, \(\frac{ SS_{res} }{ SS_{tot} }\) will also be small, and \( 1 - \frac{ SS_{res} }{ SS_{tot} } \)
+will be large (&ldquo;large&rdquo; relative the range 0 to 1, that is).  Larger R<sup>2</sup> (closer to 1) indicates a good fit.</p>
+
+<p>Going back to the mtcars example:</p>
+
+<hr/>
+
+<pre><code class="r">    ss.res &lt;- sum(mpg.residual^2) 
+    ss.tot &lt;- with(mtcars, sum( (mpg - mean(mpg))^2 ) )
+
+    R2 &lt;- 1 - ss.res / ss.tot
+    ## 0.7528328
+</code></pre>
+
+<p>This means that approximately 75% of the total variance of mpg is &ldquo;explained by the model&rdquo;, which is to say that 75% of
+the variance is correlated with (&ldquo;explained by&rdquo;) the variance of the predictor variable.</p>
+
+<p>In a simple linear model (where &ldquo;simple&rdquo; means &ldquo;only one predictor variable&rdquo;), R<sup>2</sup> is equal to the square of the correlation
+coefficient.  The correlation coefficient is often denoted with a little r, so its square is r<sup>2</sup>.  This is where &ldquo;R<sup>2</sup>&rdquo; gets
+its name from.</p>
+
+<hr/>
+
+<pre><code class="r">    r2 &lt;- cor(mtcars$mpg, mtcars$wt)^2
+    ## 0.7528328
+</code></pre>
+
+<p>R conveniently provides goodness-of-fit information in the summary of the linear model:</p>
+
+<pre><code class="r">    summary(model)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.046 on 30 degrees of freedom
+## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 
+## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10
+</code></pre>
+
+<pre><code class="r">    ## 
+    ## Call:
+    ## lm(formula = mpg ~ wt, data = mtcars)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(&gt;|t|)    
+    ## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+    ## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+    ## ---
+    ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+    ## 
+    ## Residual standard error: 3.046 on 30 degrees of freedom
+    ## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 
+    ## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10
+</code></pre>
+
+<p>Note that the R<sup>2</sup> from the summary (&ldquo;Multiple R-squared&rdquo;) is equal to the R<sup>2</sup> we calculated manually above.</p>
+
+</body>
+
+</html>

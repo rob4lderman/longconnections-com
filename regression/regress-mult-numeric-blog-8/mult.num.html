@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Intro to Regression: Part 8: Multiple regression: regressing on two numeric variables</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>Intro to Regression: Part 8: Multiple regression: regressing on two numeric variables</h2>
+
+<p>Previously we looked at a multiple regression model that used a numeric variable and a factor variable as regressors/predictors.
+Let&#39;s now work thru an example of multiple regression using two numeric variables as our regressors.</p>
+
+<p>Again we&#39;ll use the handy <strong>mtcars</strong> dataset in <strong>R</strong>.  We&#39;ve already regressed <strong>mpg</strong> on <strong>hp</strong> and <strong>wt</strong>
+individually.  To refresh your memory, the simple regression models are computed below:</p>
+
+<pre><code class="r">    library(ggplot2)
+    data(mtcars)
+
+    model.hp &lt;- lm(mpg ~ hp, data=mtcars)
+    summary(model.hp)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ hp, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.7121 -2.1122 -0.8854  1.5819  8.2360 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 30.09886    1.63392  18.421  &lt; 2e-16 ***
+## hp          -0.06823    0.01012  -6.742 1.79e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.863 on 30 degrees of freedom
+## Multiple R-squared:  0.6024, Adjusted R-squared:  0.5892 
+## F-statistic: 45.46 on 1 and 30 DF,  p-value: 1.788e-07
+</code></pre>
+
+<pre><code class="r">    ## Call:
+    ## lm(formula = mpg ~ hp, data = mtcars)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -5.7121 -2.1122 -0.8854  1.5819  8.2360 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(&gt;|t|)    
+    ## (Intercept) 30.09886    1.63392  18.421  &lt; 2e-16 ***
+    ## hp          -0.06823    0.01012  -6.742 1.79e-07 ***
+    ## ---
+    ## Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+    ## 
+    ## Residual standard error: 3.863 on 30 degrees of freedom
+    ## Multiple R-squared:  0.6024,    Adjusted R-squared:  0.5892 
+    ## F-statistic: 45.46 on 1 and 30 DF,  p-value: 1.788e-07
+
+    qplot(x=hp, y=mpg, data=mtcars) + 
+        ggtitle(&quot;mpg vs. hp&quot;) + 
+        xlab(&quot;horsepower&quot;) +
+        stat_smooth(method=&quot;lm&quot;, se=FALSE, size=1) +
+        geom_vline(x=0, colour=&quot;gray&quot;) +
+        geom_hline(y=0, colour=&quot;gray&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<pre><code class="r">    model.wt &lt;- lm(mpg ~ wt, data=mtcars)
+    summary(model.wt)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.046 on 30 degrees of freedom
+## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 
+## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10
+</code></pre>
+
+<pre><code class="r">    ## Call:
+    ## lm(formula = mpg ~ wt, data = mtcars)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(&gt;|t|)    
+    ## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+    ## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+    ## ---
+    ## Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+    ## 
+    ## Residual standard error: 3.046 on 30 degrees of freedom
+    ## Multiple R-squared:  0.7528,    Adjusted R-squared:  0.7446 
+    ## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10
+
+    qplot(x=wt, y=mpg, data=mtcars) + 
+        ggtitle(&quot;mpg vs. wt&quot;) + 
+        xlab(&quot;weight&quot;) +
+        stat_smooth(method=&quot;lm&quot;, se=FALSE, size=1) +
+        geom_vline(x=0, colour=&quot;gray&quot;) +
+        geom_hline(y=0, colour=&quot;gray&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/> </p>
+
+<p>Now we&#39;ll include both hp and wt in the same model:</p>
+
+<pre><code class="r">    model.hp.wt &lt;- lm(mpg ~ hp + wt, data=mtcars)
+    summary(model.hp.wt)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ hp + wt, data = mtcars)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -3.941 -1.600 -0.182  1.050  5.854 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 37.22727    1.59879  23.285  &lt; 2e-16 ***
+## hp          -0.03177    0.00903  -3.519  0.00145 ** 
+## wt          -3.87783    0.63273  -6.129 1.12e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.593 on 29 degrees of freedom
+## Multiple R-squared:  0.8268, Adjusted R-squared:  0.8148 
+## F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12
+</code></pre>
+
+<pre><code class="r">    ## Call:
+    ## lm(formula = mpg ~ hp + wt, data = mtcars)
+    ## 
+    ## Residuals:
+    ##    Min     1Q Median     3Q    Max 
+    ## -3.941 -1.600 -0.182  1.050  5.854 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(&gt;|t|)    
+    ## (Intercept) 37.22727    1.59879  23.285  &lt; 2e-16 ***
+    ## hp          -0.03177    0.00903  -3.519  0.00145 ** 
+    ## wt          -3.87783    0.63273  -6.129 1.12e-06 ***
+    ## ---
+    ## Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+    ## 
+    ## Residual standard error: 2.593 on 29 degrees of freedom
+    ## Multiple R-squared:  0.8268,    Adjusted R-squared:  0.8148 
+    ## F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12
+</code></pre>
+
+<p>Notice that the coefficients for wt and hp have changed going from the simple models
+to the multiple regression model.  </p>
+
+<p>The multiple regression model linear equation is:</p>
+
+<p>\[
+mpg = \beta_0 + \beta_1 \cdot hp + \beta_2 \cdot wt + \epsilon
+\]</p>
+
+<ul>
+<li>mpg is the response variable</li>
+<li>\(\beta_0\) is the Y-intercept</li>
+<li>\(\beta_1\) and \(\beta_2\) are coefficients for the regressor variables </li>
+<li>\(\epsilon\) is the error term (the residuals)</li>
+</ul>
+
+<p><br /></p>
+
+<h3>Visualizing the model</h3>
+
+<p>One thing to note is that you no longer can visualize the model on a 2D graph, since
+there are three variables under consideration (the response variable and the two regressors).
+You need a third axis for the third variable.</p>
+
+<p>So it&#39;s possible to graph the model in 3 dimensions, and you could even imagine what it would look like.
+Imagine a cube, where one corner is the origin of the graph, and the x, y, and z axes go off
+in each of the three dimensions.  The y-axis represents mpg, the x-axis represents hp, 
+and the z-axis represents wt.  The regression &ldquo;line&rdquo; is actually a 2D plane cutting thru the cube.</p>
+
+<p>The points along the plane are located by&hellip;</p>
+
+<ol>
+<li>going along the x-axis by hp,</li>
+<li>then rising along the y-axis by \(\beta_1 \cdot hp\),</li>
+<li>then going along the z-axis by wt,</li>
+<li>then rising again along the y-axis by \(\beta_2 \cdot wt \).</li>
+</ol>
+
+<p>Where you land along the y-axis is the model-predicted mpg for a car with the given wt and hp.</p>
+
+<p><br /></p>
+
+<h3>Visualizing 4D models&hellip;</h3>
+
+<p>While it&#39;s possible to visualize a regression line with two
+regressors in 3D space, once you get to three or more regressors it&#39;s pretty much
+impossible to visualize the model, unless you can manage to visualize 4D space
+(which you can&#39;t. Your brain just can&#39;t do it).  </p>
+
+<p>So we use lower-dimensional models to visualize the models and build 
+intuition about regression in general.  Once we get beyond two regressors into higher-dimensional 
+models, we can no longer visualize the model, so we have to apply our
+intuition abstractly.</p>
+
+<p><br /></p>
+
+<h3>Interpreting the multiple regression coefficients</h3>
+
+<p>Let&#39;s interpret the coefficients. Suppose hp = 0 and wt = 0, then the equation simplifies to:</p>
+
+<p>\[
+\begin{align*}
+mpg &= \beta_0 + \beta_1 \cdot hp + \beta_2 \cdot wt 
+\\[8pt]
+mpg &= \beta_0 + \beta_1 \cdot 0 + \beta_2 \cdot 0
+\\[8pt]
+mpg &= \beta_0 
+\end{align*}
+\]</p>
+
+<p>So \(\beta_0\) is the predicted mpg value for cars with hp = 0 and wt = 0. Both of those 0 values are meaningless 
+in this context, so we could shift the regressors by their means to &ldquo;center&rdquo; them:</p>
+
+<p>\[
+mpg = \beta_0 + \beta_1 \cdot (hp - mean(hp)) + \beta_2 \cdot (wt - mean(wt)) 
+\]</p>
+
+<p>
+Neither \(\beta_1\) nor \(\beta_2\) are changed by shifting the data.  The only thing that changes is the Y-intercept, \(\beta_0\),
+which can now be interpreted as the predicted mpg for cars with average hp and average wt.
+</p>
+
+<p>What about the other coefficients?  Let&#39;s imagine that wt is held constant at wt=mean(wt), so the \(\beta_2\) term drops out:</p>
+
+<p>\[
+\begin{align*}
+mpg &= \beta_0 + \beta_1 \cdot (hp - mean(hp)) + \beta_2 \cdot (0)
+\\[8pt]
+mpg &= \beta_0 + \beta_1 \cdot (hp - mean(hp))
+\end{align*}
+\]</p>
+
+<p>
+So, like in our single regressor model, \(\beta_1\) is the slope, or the change-in-mpg
+per change-in-hp. But remember that we&rsquo;re holding wt constant at wt=mean(wt),
+so what we&rsquo;re actually saying is that \(\beta_1\) is the change-in-mpg per change-in-hp
+<i>while holding wt constant at wt=mean(wt)</i>.
+</p>
+
+<p>By holding wt constant at wt=mean(wt), we&#39;ve reduced the equation to just two variables, so we can
+graph it on a 2D chart as just a straight line with slope \(\beta_1\) and Y-intercept (\beta_0).</p>
+
+<pre><code class="r">    # center the model
+    model.hp.wt &lt;- lm(mpg ~ I(hp-mean(hp)) + I(wt-mean(wt)), data=mtcars)
+    summary(model.hp.wt)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ I(hp - mean(hp)) + I(wt - mean(wt)), data = mtcars)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -3.941 -1.600 -0.182  1.050  5.854 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      20.09062    0.45846  43.822  &lt; 2e-16 ***
+## I(hp - mean(hp)) -0.03177    0.00903  -3.519  0.00145 ** 
+## I(wt - mean(wt)) -3.87783    0.63273  -6.129 1.12e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.593 on 29 degrees of freedom
+## Multiple R-squared:  0.8268, Adjusted R-squared:  0.8148 
+## F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12
+</code></pre>
+
+<pre><code class="r">    ## Call:
+    ## lm(formula = mpg ~ I(hp - mean(hp)) + I(wt - mean(wt)), data = mtcars)
+    ## 
+    ## Residuals:
+    ##    Min     1Q Median     3Q    Max 
+    ## -3.941 -1.600 -0.182  1.050  5.854 
+    ## 
+    ## Coefficients:
+    ##                  Estimate Std. Error t value Pr(&gt;|t|)    
+    ## (Intercept)      20.09062    0.45846  43.822  &lt; 2e-16 ***
+    ## I(hp - mean(hp)) -0.03177    0.00903  -3.519  0.00145 ** 
+    ## I(wt - mean(wt)) -3.87783    0.63273  -6.129 1.12e-06 ***
+    ## ---
+    ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+    ## 
+    ## Residual standard error: 2.593 on 29 degrees of freedom
+    ## Multiple R-squared:  0.8268, Adjusted R-squared:  0.8148 
+    ## F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12
+
+    B0 &lt;- coef(model.hp.wt)[&quot;(Intercept)&quot;]
+    B1 &lt;- coef(model.hp.wt)[&quot;I(hp - mean(hp))&quot;]
+    B2 &lt;- coef(model.hp.wt)[&quot;I(wt - mean(wt))&quot;]
+
+    qplot(x=hp-mean(hp), y=mpg, data=mtcars) + 
+        ggtitle(&quot;mpg vs. hp, wt=mean(wt)&quot;) + 
+        xlab(&quot;horsepower&quot;) +
+        geom_abline(intercept = B0 + B2*0, slope = B1) +
+        geom_vline(x=0, colour=&quot;gray&quot;) +
+        geom_hline(y=0, colour=&quot;gray&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-3"/> </p>
+
+<p>It doesn&#39;t matter what value we hold wt constant at. We could hold it constant at wt=mean(wt)+2, 
+and now the equation becomes:</p>
+
+<p>\[
+\begin{align*}
+mpg &= \beta_0 + \beta_1 \cdot (hp - mean(hp)) + \beta_2 \cdot (wt - mean(wt)) 
+\\[8pt]
+mpg &= \beta_0 + \beta_1 \cdot (hp - mean(hp)) + \beta_2 \cdot (2)
+\\[8pt]
+mpg &= [\beta_0 + \beta_2 \cdot (2)] +  \beta_1 \cdot (hp - mean(hp))
+\end{align*}
+\]</p>
+
+<p>
+\(\beta_2 \cdot (2)\) is just another constant term, like \(\beta_0\)
+so it has no affect on the slope associated with hp, \(\beta_1\).  The only
+thing that has changed is the Y-intercept, which is now \([\beta_0 + \beta_2 \cdot (2)]\). 
+</p>
+
+<p>Again we could graph this on a 2D chart as another straight line, parallel to the line at
+wt=mean(wt), with a Y-intercept of \(\beta_0 + \beta_2 \cdot 2\). </p>
+
+<pre><code class="r">    qplot(x=hp-mean(hp), y=mpg, data=mtcars) + 
+        ggtitle(&quot;mpg vs. hp, wt=mean(wt) and wt=mean(wt)+2&quot;) + 
+        geom_point(mapping=aes(x=hp-mean(hp), y=mpg+B2*2), data=mtcars, colour=6) + 
+        xlab(&quot;horsepower&quot;) +
+        ylab(&quot;mpg&quot;) + 
+        geom_abline(intercept = B0 + B2*0, slope = B1) +
+        geom_abline(intercept = B0 + B2*2, slope = B1, colour=6) +
+        geom_vline(x=0, colour=&quot;gray&quot;) +
+        geom_hline(y=0, colour=&quot;gray&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAA21BMVEUAAAAAADoAAGYAOmYAOpAAZrY6AAA6ADo6AGY6OgA6Ojo6OmY6OpA6ZrY6kNtmAABmADpmAGZmOgBmZgBmZjpmZmZmkJBmkNtmtv9/f39/f5V/f6t/lcF/q9aQOgCQOjqQOmaQkDqQkGaQtpCQ29uQ2/+Vweurf6ur1v+2ZgC2Zjq225C2/7a2//++vr7BlX/BlavBwdbB6//Wq3/W///bkDrbkGbb25Db29vb/7bb/9vb///l5eXrwZXr///y8vL/AP//tmb/1qv/25D//7b//9b//9v//+v///9CGVguAAAACXBIWXMAAAsSAAALEgHS3X78AAATmElEQVR4nO3dC3vbRnaAYdprKWnrWtG2m0pZ29l6146UtZRsJPVm2dYtEv7/L+oc8AaQwDkYYAjMAN/32JYlkgCIlxiCN2iW0SSbDb0ANEzATzTgJxrwEw34iQb8RAN+ogE/0YCfaMBPNOAnGvATDfiJBvxEA36iAT/RgJ9oo4T/n34v3PPswpQe/MPBkX6Gx7evPCd5up6iXPjhu/fKmW+fn+1ydg8Hs9nGHHYS8Fl2tbdx4fuXn+rP3Rlend3DgfvBVQ/yg8Lff/NuNtu7dX/dzf6v+/kt3d3in72bX/HTvfk/V7PZs/VG8XDw/b58v7rEvMe3R9n9/lF29Yc/yvS25+DOMZu9cKv4fn82mx3NLy/TfTg827zw6cJy66yrhdvB7PKrm9+s9CEnTMPC7+9lt+6a33/z/uHAXWN3S5db/P3+3FNWgtu+5UthM8vPefri0/ISy5+7Den2n1+5lShbkVv3M7m5FOaQb1xXcjk3YpzKnObTybfA0oXdnF98ms+qfNZ8YD6YzzL87E4Lt5/Rwx/lK9f9zdePKMs6WHDKz5z4xtian/NW1uRRadx3l7z6057bmIpjb2EO+WRkW8vPvLi8+5qffePCxU2ucNZ8EovFCT+7Ffzj28Kdwa4aeKh/n19pgZfr7lbD1Wq8y/JV4f7ImFm4W1/BLy6x+vnh2c9/ffm/h2clifUcrvKtcvZquf9UvgGVL7wE2zjrVT50f3u2g9nNx4z8evbiHjf87fOP8y36tHAnXwf/+OPf/vLx8O8vP5XG3oLEfPgWh1fFTXA+neKFV5PdPGsRPvzsFlv8/b7vo4RWRQNfMdTLftx8LZe27JqhPrv6/uX//fjuVVazCa5uTTKH241NcOPCiy1+86zFoT787Obwt892f/8uxQO/vf/k1o/s88oqLOzurNfgYm9p2a3btH7+p6M6ice37rxuteaT23/2vnSnu3HhxX389ln31gsXfHY5fB/7dXnxwP9p/ugnf8S05JSdJRno8zu/xWOsNfziEsvHXnJCPlZczfYq5pDvK8jm5CYndyHL6cwfV5cvvNir3zqrm8TyseYuZpfJ96v7+t0WyxM4padlCiuiwSXu/6PjrLcfNZ/u8G6259nVFRu83MU1ey5sBf9fXQfHq829aPWZu871PLuaYoPPx7pGG4D51G3jVg/ellPe7RNnPc+uJh/462Ll71r3Ncxkrs8DTSfQ8gRaO8FWj1se4NWAB75LwFsBrwa8FfBqwFsBD3yXxgX/tVj5u8E7H3oBykW2dmR52OLV2OKB7xLwVsCrAW8FvBrwVsAD3yXgrYBXA94KeDXgrYAHvktThJ/NfJYIeLWE4OXNwR5LBLwa8FbAqzHUWwHfGt4v4NWAtwJeDXgr4IHvEvBWwKsBbwW8GvBWwAPfJeCtgFcD3gp4NeCtgAe+S8BbAa+WFDwvy04T3u8FeeDVgLcCXo2h3gr49vBeAa8GvBXwasBbAQ98l4C3Al4NeCvg1YC3Ah74LgFvBbwa8FbAqwFvBTzwXQLeCng14K2AVwPeCnjguwS8FfBqwFsBrwa8FfDN4P2OdFRRzTXzni7waqHhPY9tVlH1NfOfLvBqwFsB3wieob6m0cN3jp07tSHgL46PT+TfH34D3ruE4e/eZL//dHn3+ov7A7xvCcO7HPznD/Kv+/+xSznr4J0PvQCppcBfHH/IPp9kT79eLn6weRsKEVu82kA7d58/rLZ44L1KGP7ug8BzH9+uhOFlr/4Ne/UtSxl+u81JhQh4NeCtgFcD3gp44LsEvBXwasBbAa8GvBXwwHcJeCvg1YC3Al4NeCvgge8S8FbAqwFvBbwa8FbAA98l4K2AVwPeCng14K2AB75LwFsBrwa8FfBqwFsBD3yXJgnP752bJjy/afIaeDvg1VKCZ6i/nii8V8CrAW8FvBrwVsAD3yXgrYBXA94KeDXgrYAHvkvAWwGvBrwV8Gp9wN/c+CwR8GoJwd/cNJFfPZ8PvNrY4Nev4AGvlhB8o6Ee+IalBN8ohvpmjQ5+FfBqwFsBrwa8FfDAdwl4K+DVgLcCXg14K+CB7xLwVsCrAW8FvFo3+K/Fyt8N3vnQC1AusrUjy8MWr8YW3x7e650YwKulBN/snRjLgFcD3gp4tV3D5y+zM9RPDt7vmAh5wKsBbwW8Wi9DvVfAq6UC7x/wasBbAa8GvBXwwHcJeCvg1YC3Al4NeCvgge/SuOBLT88ArzUu+NJzssBrjQ1eWuADrzVGeKnFqzE1Aa8WG7xMKgw+8Goxwss/3fGBV4sVXmqL7y7l/gCvFjO81AJ/Ng94tWjhC++v88TX4f0OlncNvFFo+M131Prga0O93zt1JeDVdg0vhfgtVMAvihW+bkhubs9QrxYtfH0NN3x27tQShJca4AOvlii8ZOADr5YwvKTgA6+WOLxUgw+82gjgpQp84NVGAi9t4AOvNiJ4qYAPvNrI4KUFPvBqI4SXZuHeyQO8WmTwy9foAkwIeLUo4ctP7be8HQCvFh386lAKyw2/7QgAvFp88MVrNlvWYjrAq8UNL7W9ywdeLX74tvt7wKslAL9Q98UHXi0d+I3/mgGvlgD8xiHTmuIDr5YC/HZN8IFXSxNesvCBV0sXXtLwgVdLG16qswdeLX3465oNH3i1UcBLW/jAq40GXirhA682KnhphQ+8mgf80y/Hx6+/ZBfHP/wWMbyU4wOv5gF/9ybLLk7uXn9xf+KGl2bngd7DBbz0+eTzh+z3ny7df49d2lmH7jzLj8Y09GKkk7aq3Eb/+SR7+vVy8f3mbShEgd9laz67aw0MbPFuoHeD/WqLTwRe0vDNGwbwT7+cyEbf4j4+ht87VwcMvAl/IffqH1rs1UfzmyYrkRnq7aF+q81JVRcNvOT9Ji7gW8NHMdQXCnEwJu8mCe9Vo2vWQE5/AmeNz1CfEHyYd+DkU2HnbnrwyykBnwx896G+OCndHviY4Bvk9yJNPT7wo4aXqvGBHym89a594McJX7GZl38E/GTgyz8GfpzwygOEoAdjAt4qqqNehTsWE/A1rZ7Pjwre9TUMPvDVrV/Biw5e/umOD3x1lfCdVnbwd9l2wwe+poqhvtua3snbq9svEvBWUcNL7RYLeKtGQ33AF2msKte0P35q8A8H81evnp8NAF9bFEfE8MNPDT47feX+udq7ffEJ+HYLMi81+IfDs/zfj4dVm/zmpELU9+vxVubyNMNPDf7xbb7Fv/jvlzFt8U3q9UOTtn1q8G6sd1dq7+HgqMId+ELGhp8evNbmpEI0EHyQX4em4ANvlfpbr2qmlBz841sZ6oHvOrXU4Bc7dzXym5MKUcpDfXmCpUmmBr98OFf5/M2Y4GvrsjwF/NTg5xv7BLb42rouzwI/NfjlU7bVz9luTipEY4OXwr2Rh716s5jgXVkg/N7gb5XXaBrAe31COm+s8PJPAPzehvrv3nfZ4v2OiZA3ZnipI36/e/UTgA/+cG6j0trpYN/fXv2rLvDJDPW9f2iy7YbfH3y3+3j/JgKvz7S+RO7jWzSFob40Xz/8RO7jWzT2nbuKfPBTuY/3b4LwUlP8np+5G/19fH09fmiyCT7P3FklAr9JbeEDb5UGfKWzhh8HfOlROvBaPvDaCXHAl56aA16r6VBfPm371FjgpQV+hPAhXg8b+IgYm/YxwUstnpSvKSB8kFdChz8USulqxAYvkwqDD3xVq6sSI7z80x1/oKF+qKdsPcrxY4WXuuEPs8UP8iJNi4K9iWtXj+Pb4LtLuD/Aq30NhL/LJ3A87W/mMdSrLRbHE3/7zDt+5s5nw98BfIjihJea41d/sqcD/Ndi5e/W5ZpNcmdreM4mnQebUpDq1k7HhLTVudzy7HKLX+ax5ae9xQ/xadkGW37vQ32xhvhJw9cb7PiTNN47fD2/OtcAH3g1ZXG88Ad4WdbATxp+kKG+PP/mB2PqG15S8NOGr62/D002PhjTEPBSjf0Y4Z1Ev5+WtfGHfQdO1YY/Qnhh6P9j0jr+8G+92sQHXs13l0PZ2RwYXirijxC+/6G+PPMq/DjgpSX+GOGvhz4ixjZ+PPASz9WbtV+cMn5c8FKoN3EBX9EaPzr43L2E3/KGAHxNc/w44Yv/uWk5BACvlOPHBV86lMJy6wd+Vbj33G1CDw2/cc3augOvF91QX3XNWtnHBD/o4/jqUoDP1b3xI4If7pm7+hKAX5N74QOvlhT89ndKEcEz1DepZqgv/6ABfkzw1+zc2TW8ZiY+8GrJwkuqPfBqScNfaxs+8Gqpw0vV+MCrjQFe2sYHXm0s8FIZH3i1McFLa3zg1cYGL83xgVcbI7x0c3Me18GYgLcK9567MO/hAj45+Osgb+ADPkV4ycC3bhnApwov1eObYwLwKcNL1cTAjx5eqmBmqJ8CvOS5wwf8WOCl/g/GBLxVo2sW4h04qw9sBFgeO+CtmlyzJhtsk6dsF8dU7Lw8DQLeqk/46wYf2AA+IvggQ31hUho+8DHBN8j31bk6fOBHDi/t8GBMwFv1Db9JvaODMQFv1TN85Qi/g4MxAW8VA/zihJDLA7zV0EN96aRwvyoFeKvIjnoV6lhMwFtFBi/LEwIfeKsI4SXBLx8k0O83AwBvVbhmnbaz8G+vnpW2fM/fCQG81fqadRthdwAv1KuFAr4wqRDFC78a3OcLxlC/nlSIGg31wx8Rw/dWmTT87z9dZtnF8Q+/9QRfW8CXZc2U5fGxTxn+7vjPl9nd6y/uD/AeS5KXMPzTP55+vcw+f5hv+Nmxq35w2HE3N+ZZzntYjHmC39vMdpcy1OfwJ/mXeZu3oRBF+jjeyNzyE97iF/DLLR74zVT85OGjuI9vkid8oN+DV4ufPHwUe/VN8oOv31oDHYwpafitNicVovThK6cHvFXaQ315koVpAm+V7s5dResNH3irUcFLc3zgrUYHL4V6Hw/wdlHBy9oJgw+8VXTwUnd84K2ihJe64QNvNfzDuVLltdMeH3irYZ/A2Wp77bSzB94qenh1rrUBbxX1UF+a8RDHYgLerI+PUPV/LCbgzfr67FxDfOCtUoOXGuADb5UIvO9vUwTeKg147wPsAm+VMvzilB0uDvBmfQ/1pdN2diymkcNH9HJY27Wzo2MxjRs+yAuhERwKZQfHYgLeLAJ4aXldgLfyHOoHe8rWI8EH3spvix/mRZoWBTwYE/DXCcHL4vjjb59/1PBjG+ql5eJ44VecedzwIYoUXmpsD3yLIoa/brzhT22oD5Hvp2VrTtjhBypa7e8Bb+W1PPUGO/4kjTc+8FZpwOszrwh4q/iH+vL8mx+MCXi1uHfuqmqED7xViOVxED1/WrbJwZiAVwuwPPnx0LpPJs9jcVR74K3Shb82djaBV0tzqC/NvAofeKv0du4q2sYH3moU8FIZH3ir0cBLpYMxAa82KnhpdTAm4NVGBy/l+MCrjRJelmfzUOvAlxstPFu8XvKP46sD3irpZ+7qA94KeOBbx1DfoDHCX7NzZwe8GvBWwKsBbwV8RV+Llb8bvPOhF6BcZGtHloctXo0tHvguAW8FvBrwVsCrAW8FPPBdAt4KeDXgrYBXA94KeOC7BLwV8GrAWwGvBrwV8MB3CXgr4NWAtwJeDXgr4IHvEvBWwKsBbwW8GvBWwAPfJeCtgFcD3gp4NeCtgAe+fJBAv98MALxVvPDlIwR6/k4I4K2Ab7g43QLeiqEe+C4BbwW8GvBWwKsBbwU88F0C3gp4NeCtgFcD3gp44LsEvBXwasBbAa8GvBXwwHcJeCvg1YC3Al4NeCvgge8S8FbAqwFvBbwa8FbAA98l4K2AVwPeCng14K2AB75LwFsBrzYc/MXxD78B713y8Hevv7g/wPuWPPznD9nvP126/xy7zinhPOFPsqdfL9nifRvPFg+8V8nDcx/fruTh2atvV/rwxTYnFSLg1YC3Al4NeCvgge8S8FbAqwFvBbwa8FbAA98l4K2AVwPeCng14K2AB75LwFsBrwa8FfBqwFsBb3Xc9oK7icVR214e4HdSZIsDfF9FtjjA91VkixMSntIO+IkG/EQDfqIBP9FawOefqZp/0KL4cYshi2U5Yls5T78cH7/+Urk8/vB3x3++XHy0qvQBqwGLZTmiWzl3b5z3SeXyeMM//UM+Pjv/MGXpI5UDFstyxLlyTiqXp8VQn1+3/OPTpQ9RD1gsy5FFuHLcRl+5PH7wF8dvFtctrht1JMuRxbdyLt5k1cvTcouP525MimU5sthWztMvJ1lWvTwt4ePZcc2LZTliWzkXcgSbD4H26mkUAT/RgJ9owE804CfadODvvz0behFiCviJNiX4f5vNjrLs4WD2/Cy7/5c/Pj+7ncl/Fz95OPzP2bP3i+8e3x5l99+8z25ffCqcf+irELIJwe+/EsfsNP9yv3/kqM+yq71MfuK+PBy8+HTrcOenX7mfuZuJ+zI/Vc4/qiYE74Z691e0H757L9+5L3KCfHE/fTg4yh5/fL88/eWnn9/tyffzU0d3RzE5ePniPHPI+30Z3N1YPnNf85vB6dHi9IfDj4d///aj3B7yU4FPtu0tXpI78cP8vwK/3uKz0+//9fHHd3vZ4lTgk20Bv7yPd/+Te/z1vf7DwV7hu+x2Nr+XL5x/VE0PfrGXLpCnq716GfG/+/f1Xn0236dfnwr8aFvs6k0l4JcBT1MI+IkG/EQDfqIBP9GAn2jATzTgJ9r/AzOSH8VKWCjUAAAAAElFTkSuQmCC" alt="plot of chunk unnamed-chunk-4"/> </p>
+
+<p>
+The pink dots are the same as the block dots, shifted down by the wt factor, \(\beta_2 \cdot 2\).
+</p>
+
+<p>
+We could hold wt constant at various levels and end up with a bunch of parallel lines,
+all with the same slope but different Y-intercepts.  If you imagine a z-axis extending
+into (and out of) the chart, each of those parallel lines exists at a different point along
+the z-axis, corresponding to the different values for wt.  Taken together, the parallel lines
+form the 2D plane of the regression model.
+</p>
+
+<p>Similarly, \(\beta_2\) can be interpreted as the change-in-mpg per change-in-wt
+while holding hp constant.  If we hold hp constant at hp=mean(hp), the \(\beta_1\) term drops out:</p>
+
+<p>\[
+\begin{align*}
+mpg &= \beta_0 + \beta_1 \cdot (0) + \beta_2 \cdot (wt - mean(wt))
+\\[8pt]
+mpg &= \beta_0 + \beta_2 \cdot (wt - mean(wt))
+\end{align*}
+\]</p>
+
+<p>
+Again, we could hold hp constant at any value and the only thing that would change is the Y-intercept.
+The slope relating wt to mpg, \(\beta_2\), does not change.
+</p>
+
+<p>Generally speaking for multiple regression models, the
+coefficients of the regressor variables can be interpreted as the change-in-response 
+per change-in-regressor <i>while holding all other regressors constant</i>. </p>
+
+<p><br /></p>
+
+<h3>Calculating the coefficients in a multiple regression model</h3>
+
+<p>In order to calculate a regressor&#39;s coefficient in a multiple regression model, we must first &ldquo;regress out&rdquo; all other
+regressor variables from both the regressor in question and the response variable.  We did this in part 7
+for the multiple regression model with hp and am (transmission type) as regressors.  Let&#39;s do it again 
+here, to build up our understanding and intuition.</p>
+
+<p>By &ldquo;regress out&rdquo;, we mean to &ldquo;remove any correlative influence&rdquo; of one variable from another, so that we can
+examine the variable in &ldquo;isolation&rdquo;, so to speak.
+We do this by building a simple regression model for the two variables,
+treating one as the response and the other as the regressor (the one being &ldquo;regressed out&rdquo;), then taking the residuals 
+and making some use of them (e.g. correlating them with another variable).</p>
+
+<p>The residuals represent the &ldquo;leftover&rdquo; variance in the response 
+variable <em>after removing</em> (i.e. &ldquo;accounting for&rdquo;) any correlative relationship with the regressor variable.  In other words, the residuals
+represent the portion of the response variable&#39;s variance that is NOT explained by the regressor variable. </p>
+
+<p>So the logical next step would be to try to correlate this unexplained variance with another regressor&#39;s variance, to see how well 
+the other regressor variable can explain this &ldquo;leftover&rdquo; variance.</p>
+
+<p>However we can&#39;t just directly compare the residuals with another regressor, because this 2nd regressor may be correlated with 
+the first regressor (the one we just &ldquo;regressed out&rdquo; of the response).   In other words, a portion of the 2nd regressor&#39;s variance may already 
+be explained by the first regressor (if they&#39;re correlated). </p>
+
+<p>We must remove this correlative influence first, to &ldquo;isolate&rdquo; the 2nd regressor from the first regressor, before considering the 2nd regressor&#39;s 
+effect on the unexplained/&ldquo;leftover&rdquo; variance of the response variable.  We do this by building another simple regression model, with the 2nd 
+regressor acting as the response variable and the first regressor acting as the regressor, then taking the residuals.  The residuals represent
+the variance of the 2nd regressor that is NOT explained by the first regressor. </p>
+
+<p>Then we compare the two sets of residuals.  We&#39;re comparing the unexplained variance of the response variable with the unexplained variance
+of the 2nd regressor, to determine the correlation between them, after removing (&ldquo;regressing out&rdquo;) the influence of the first regressor.</p>
+
+<p>I&#39;m not sure if I explained that well.  Let&#39;s work thru the example and hopefully it will become more clear.</p>
+
+<p>
+In our multiple regression model, we have one response variable (mpg) and two regressors (hp and wt).  First up, we want to calculate
+\(\beta_1\), the coefficient for regressor hp.  The coefficient will tell us how mpg &ldquo;moves&rdquo; w/r/t hp, <i>while holding all other regressors
+(wt) constant</i>. 
+</p>
+
+<p>
+We can&rsquo;t actually hold wt constant in the dataset, simple because in reality the wt variable varies from car to car.
+By &ldquo;holding wt constant&rdquo;, what we really mean is, &ldquo;remove the effect of wt from the model&rdquo;, which we can do by regressing it out of 
+both the response variable mpg and the regressor variable hp.  Then we take the residuals from both models and correlate them, which
+tells us how mpg moves w/r/t hp <i>after the effect of wt has been removed from both</i>.
+</p>
+
+<pre><code class="r">    model.mpg.wt &lt;- lm( mpg ~ wt, data=mtcars )
+    model.hp.wt &lt;- lm( hp ~ wt, data=mtcars )
+
+    model.mpg.wt.resid &lt;- resid(model.mpg.wt)
+    model.hp.wt.resid &lt;- resid(model.hp.wt)
+
+    model.mpg.hp &lt;- lm( model.mpg.wt.resid ~ model.hp.wt.resid )
+    summary(model.mpg.hp)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = model.mpg.wt.resid ~ model.hp.wt.resid)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -3.941 -1.600 -0.182  1.050  5.854 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)       -3.040e-16  4.507e-01   0.000   1.0000   
+## model.hp.wt.resid -3.177e-02  8.878e-03  -3.579   0.0012 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.55 on 30 degrees of freedom
+## Multiple R-squared:  0.2992, Adjusted R-squared:  0.2758 
+## F-statistic: 12.81 on 1 and 30 DF,  p-value: 0.001197
+</code></pre>
+
+<pre><code class="r">    ## Call:
+    ## lm(formula = model.mpg.wt.resid ~ model.hp.wt.resid)
+    ## 
+    ## Residuals:
+    ##    Min     1Q Median     3Q    Max 
+    ## -3.941 -1.600 -0.182  1.050  5.854 
+    ## 
+    ## Coefficients:
+    ##                     Estimate Std. Error t value Pr(&gt;|t|)   
+    ## (Intercept)       -3.040e-16  4.507e-01   0.000   1.0000   
+    ## model.hp.wt.resid -3.177e-02  8.878e-03  -3.579   0.0012 **
+    ## ---
+    ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+    ## 
+    ## Residual standard error: 2.55 on 30 degrees of freedom
+    ## Multiple R-squared:  0.2992, Adjusted R-squared:  0.2758 
+    ## F-statistic: 12.81 on 1 and 30 DF,  p-value: 0.001197
+
+    qplot(x=model.hp.wt.resid, y=model.mpg.wt.resid) + 
+        ggtitle(&quot;residuals vs residuals&quot;) + 
+        ylab(&quot;residuals of mpg ~ wt&quot;) + 
+        xlab(&quot;residuals of hp ~ wt&quot;) + 
+        geom_hline(y=0,colour=&quot;lightgray&quot;) +
+        geom_vline(x=0,colour=&quot;lightgray&quot;) +
+        geom_abline(intercept = coef(model.mpg.hp)[1], slope = coef(model.mpg.hp)[2])
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-5"/> </p>
+
+<p>Let&#39;s think about this chart.  The y-axis measures the residuals of mpg after wt has been removed.
+The x-axis measures the residuals of hp after wt has been removed.  Variance along the y-axis 
+shows us how mpg &ldquo;moves&rdquo; after wt has been accounted for.  Variance along the x-axis shows us
+how hp &ldquo;moves&rdquo; after wt has been accounted for.  Comparing the two sets of residuals to each other
+shows us how mpg and hp &ldquo;move together&rdquo;, after the effect of wt has been removed from both of them.</p>
+
+<p>There&#39;s a clear negative correlation in the residuals (I&#39;ve overlaid the plot with the regression line).
+This tells us that mpg decreases as hp increases, regardless of vehicle wt.  This agrees with
+our intuitive explanations (higher hp means lower mpg, regardless of wt).  </p>
+
+<p>
+The slope of this regression line gives us the \(\beta_1\) coefficient for the multiple regression
+model.  Note from the model summary that the slope matches up with the \(\beta_1\) coefficient from
+the multiple regression model.
+</p>
+
+<p>
+We do the same procedure to determine the wt coefficient, \(\beta_2\).  This time we must regress
+hp out of both mpg and wt.
+</p>
+
+<pre><code class="r">    model.mpg.hp &lt;- lm( mpg ~ hp, data=mtcars )
+    model.wt.hp &lt;- lm( wt ~ hp, data=mtcars )
+
+    model.mpg.hp.resid &lt;- resid(model.mpg.hp)
+    model.wt.hp.resid &lt;- resid(model.wt.hp)
+
+    model.mpg.wt &lt;- lm( model.mpg.hp.resid ~ model.wt.hp.resid )
+    summary(model.mpg.wt)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = model.mpg.hp.resid ~ model.wt.hp.resid)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -3.941 -1.600 -0.182  1.050  5.854 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       -1.154e-16  4.507e-01   0.000        1    
+## model.wt.hp.resid -3.878e+00  6.221e-01  -6.233 7.27e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.55 on 30 degrees of freedom
+## Multiple R-squared:  0.5643, Adjusted R-squared:  0.5498 
+## F-statistic: 38.86 on 1 and 30 DF,  p-value: 7.273e-07
+</code></pre>
+
+<pre><code class="r">    ## Call:
+    ## lm(formula = model.mpg.hp.resid ~ model.wt.hp.resid)
+    ## 
+    ## Residuals:
+    ##    Min     1Q Median     3Q    Max 
+    ## -3.941 -1.600 -0.182  1.050  5.854 
+    ## 
+    ## Coefficients:
+    ##                     Estimate Std. Error t value Pr(&gt;|t|)    
+    ## (Intercept)       -1.154e-16  4.507e-01   0.000        1    
+    ## model.wt.hp.resid -3.878e+00  6.221e-01  -6.233 7.27e-07 ***
+    ## ---
+    ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+    ## 
+    ## Residual standard error: 2.55 on 30 degrees of freedom
+    ## Multiple R-squared:  0.5643, Adjusted R-squared:  0.5498 
+    ## F-statistic: 38.86 on 1 and 30 DF,  p-value: 7.273e-07
+
+    qplot(x=model.wt.hp.resid, y=model.mpg.hp.resid) + 
+        ggtitle(&quot;residuals vs residuals&quot;) + 
+        ylab(&quot;residuals of mpg ~ hp&quot;) + 
+        xlab(&quot;residuals of wt ~ hp&quot;) + 
+        geom_hline(y=0,colour=&quot;lightgray&quot;) +
+        geom_vline(x=0,colour=&quot;lightgray&quot;) +
+        geom_abline(intercept = coef(model.mpg.wt)[1], slope = coef(model.mpg.wt)[2])
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-6"/> </p>
+
+<p>Again, there&#39;s a negative correlation, telling us that increased wt decreases mpg, regardless
+of the car&#39;s hp.  The slope of the correlation gives us the value of \(\beta_2\) in the 
+multiple regression model.</p>
+
+</body>
+
+</html>
